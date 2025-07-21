@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { useRouter } from "next/navigation";
+import NewCollectionBanner from "@/app/componets/NewCollectionBanner";
+import RelatedProducts from "@/app/componets/RelatedProducts";
 
 interface CartItem {
   _id: string;
@@ -45,21 +47,9 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div>
-      {/* Header Section */}
-      <div className="w-full h-[286px] bg-black relative">
-        <div className="absolute top-28 left-10 md:top-28 md:left-60">
-          <h2 className="text-white font-dancing lg:font-[forte] text-[36px] md:text-[36px] font-[700]">
-            Your Cart
-          </h2>
-          <Link href="/" className="px-2 text-white font-playfair">Home</Link>
-          <span className="px-2 text-white">/</span>
-          <span className="text-white text-[16px] font-[500] px-2 font-playfair">Cart</span>
-        </div>
-      </div>
-
+    <div className="bg-white">
       {/* Main Content */}
-      <div className="max-w-screen-xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="bg-white text-black max-w-screen-xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Product List */}
         <div className="col-span-2 space-y-6">
           {cartItems.length === 0 ? (
@@ -133,6 +123,7 @@ const Cart: React.FC = () => {
           </div>
         </div>
       </div>
+        <RelatedProducts/>
     </div>
   );
 };

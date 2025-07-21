@@ -18,6 +18,9 @@ import {
 } from "react-icons/fa";
 import ProductTabsWithReviewForm from "../../../../componets/product-tabs-with-review-form";
 import RelatedProducts from "../../../../componets/RelatedProducts";
+import Question from "@/app/Pages/HomePage/Question";
+import Notification from "../../../../componets/notification";
+
 
 interface Review {
   name: string;
@@ -75,7 +78,13 @@ const ProductDetail: React.FC = () => {
       try {
         const data = await client.fetch(
           `*[_type == "product" && _id == $id][0]{
-            _id, name, priceUSD, description, category, image, reviews,
+            _id,
+            name,
+            priceUSD,
+            description,
+            "category": category->name,
+            image,
+            reviews,
             sizeOptions,
             "price": priceUSD
           }`,
@@ -110,31 +119,21 @@ const ProductDetail: React.FC = () => {
   const averageRating = product?.reviews ? calculateAverageRating(product.reviews) : 0;
 
   if (loading) {
-    return <div className="w-full h-screen flex justify-center items-center"><p className="text-lg font-semibold">Loading product details...</p></div>;
+    return <div className="bg-white w-full h-screen flex justify-center items-center"><p className="text-lg font-semibold">Loading product details...</p></div>;
   }
 
   if (!product) {
-    return <div className="w-full h-screen flex justify-center items-center"><p className="text-lg text-red-500 font-semibold">Product not found.</p></div>;
+    return <div className="bg-white w-full h-screen flex justify-center items-center"><p className="text-lg text-red-500 font-semibold">Product not found.</p></div>;
   }
 
   return (
     <div>
-      {/* Banner */}
-      <div className="w-full h-[286px] bg-black relative">
-        <div className="absolute top-48 left-10 md:top-20 md:left-60">
-          <h2 className="text-white font-[forte] text-[26px] md:text-[36px] font-[700]">Product Details</h2>
-          <Link href="/" className="px-2 text-white">Home</Link>
-          <span className="px-2 text-white">/</span>
-          <span className="text-white text-[16px] font-[500] px-2">Product Details</span>
-        </div>
-      </div>
-
       {/* Product Info */}
-      <div className="max-w-7xl mx-auto p-6 my-20">
+      <div className="bg-white max-w-7xl mx-auto p-6 my-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           {/* Image */}
           <div className="w-full border rounded-xl p-4 shadow-md bg-white">
-            <Image
+              <Image
               src={urlFor(product.image).url()}
               alt={product.name}
               width={600}
@@ -152,8 +151,6 @@ const ProductDetail: React.FC = () => {
               {renderStars(averageRating)}
               <span className="text-sm text-gray-500">({product.reviews?.length || 0} reviews)</span>
             </div>
-
-            <p className="text-sm text-gray-500">Category: <span className="font-medium text-gray-700">{product.category}</span></p>
 
             {/* Price */}
             <div className="text-2xl font-semibold text-green-600">
@@ -197,12 +194,7 @@ const ProductDetail: React.FC = () => {
 
             {/* Buttons */}
             <div className="flex gap-4 mt-4">
-              <button
-                onClick={handleAddToCart}
-                className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded-full font-bold text-black transition"
-              >
-                🛒 Add to Cart
-              </button>
+             <Notification product={{ _id: product._id, name: product.name, quantity: 1, image: product.image}} onAddToCart={handleAddToCart} />
             </div>
 
             {/* Description */}
@@ -230,6 +222,9 @@ const ProductDetail: React.FC = () => {
       {/* Tabs & Related Products */}
       <div className="md:mx-14 lg:mx-48">
         <ProductTabsWithReviewForm product={product} />
+      </div>
+      <div>
+        <Question/>
       </div>
       <div className="mx-8 md:mx-20 lg:mx-48">
         <RelatedProducts />

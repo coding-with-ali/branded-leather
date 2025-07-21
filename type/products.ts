@@ -18,4 +18,5 @@ export interface Product {
   description: string;
   category: string;
   sizeOptions: string[];
+  discountPercentage: number;
 }

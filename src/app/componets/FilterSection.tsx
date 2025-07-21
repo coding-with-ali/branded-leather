@@ -1,9 +1,34 @@
+
 "use client";
 
 import React, { ChangeEvent, useState } from "react";
 
-const categories = ["biker", "bomber", "shearling", "hooded", "vest", "winter"];
-const discounts = [10, 15, 20, 25, 30];
+const menCategories = [
+  "Men Leather Jackets",
+  "Men Motorcycle Jackets",
+  "Men Bomber Jackets",
+  "Men Black Jackets",
+  "Men Brown Jackets",
+  "Men Aviator Jackets",
+  "Men Distressed Jackets",
+  "Men Cafe Racer Jackets",
+  "Men Winter Jackets",
+  "Men Puffer Jackets", 
+];
+
+const womenCategories = [
+  "Women Leather Jackets",
+  "Women Black Leather Jackets",
+  "Women Biker Jackets",
+  "Women Bomber Jackets",
+  "Women Denim Jackets",
+  "Women Fur Jackets",
+  "Women Cotton Jackets",
+  "Women Varsity Jackets",
+  "Women Puffer Jackets",
+  "Women Wool Jackets",
+];
+
 const priceRanges = [
   "0-100",
   "100-200",
@@ -17,13 +42,13 @@ const priceRanges = [
 const filterOptions = [
   {
     id: "category",
-    title: "Category",
-    options: categories,
+    title: "Men's Collections",
+    options: menCategories,
   },
   {
-    id: "discountPercentage",
-    title: "Discount Offers",
-    options: discounts,
+    id: "category",
+    title: "Women's Collections",
+    options: womenCategories,
   },
   {
     id: "priceRange",
@@ -58,16 +83,14 @@ const FilterSection = ({ onFiltersChange }: FilterSectionProps) => {
     <aside className="sticky top-24 hidden lg:block w-full max-w-xs bg-white shadow-lg rounded-xl p-6">
       <h2 className="text-2xl font-bold text-gray-800 border-b pb-3 mb-6">Filter By</h2>
       {filterOptions.map(({ id, title, options }) => (
-        <div key={id} className="mb-6">
+        <div key={`${id}-${title}`} className="mb-6">
           <p className="text-lg font-semibold text-gray-700 mb-3">{title}</p>
           <ul className="space-y-2">
             {options.map((option) => {
               const displayValue =
-  id === "discountPercentage"
-    ? `${option}% OFF`
-    : id === "priceRange"
-    ? `$${String(option).replace("-", " - $")}`
-    : String(option).charAt(0).toUpperCase() + String(option).slice(1);
+                id === "priceRange"
+                  ? `$${String(option).replace("-", " - $")}`
+                  : String(option).charAt(0).toUpperCase() + String(option).slice(1);
               return (
                 <li key={option}>
                   <label className="flex items-center space-x-2 text-gray-600 cursor-pointer">

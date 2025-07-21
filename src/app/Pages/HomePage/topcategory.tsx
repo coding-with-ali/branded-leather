@@ -7,22 +7,22 @@ import Link from 'next/link';
 export default function BannerSection() {
   const banners = [
     {
-      title: 'Biker Jackets',
-      description: 'Feel the ride, wear the roar.',
-      image: '/banner1.jpg', // 👈 apni image daalna
-      link: '/biker-jackets',
+      title: 'TOP RATED ',
+      description:"BEST SELLING",
+      image: '/best selling.webp',
+      link: '/Pages/PageHero/bags',
     },
     {
-      title: 'Cotton Jackets',
-      description: 'Lightweight style, everyday comfort.',
-      image: '/banner2.jpg',
-      link: '/cotton-jackets',
+      title: 'Classic pieces',
+      description:" OUT DOOR APPERAL",
+      image: '/out door.webp',
+      link: '/Pages/PageHero/jacket',
     },
     {
-      title: 'New Arrivals',
-      description: 'Fresh looks for a bold season.',
-      image: '/banner3.jpg',
-      link: '/new-arrivals',
+      title: 'New listing',
+      description: "LEATHER PURSE",
+      image: '/leather purse.webp',
+      link: '//Pages/PageHero/wallet',
     },
   ];
 
@@ -46,8 +46,8 @@ export default function BannerSection() {
 
           {/* Text Content */}
           <div className="absolute bottom-5 left-5 z-10 text-white">
-            <h3 className="text-[40px] font-bold">{banner.title}</h3>
-            <p className="text-md mb-2">{banner.description}</p>
+            <h3 className="text-[20px]  font-bold">{banner.title}</h3>
+            <p className="text-[30px] mb-2">{banner.description}</p>
             <Link
               href={banner.link}
               className="inline-block px-4 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-100 transition"
