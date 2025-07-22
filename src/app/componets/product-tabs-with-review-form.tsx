@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { client } from "@/sanity/lib/client";
+import ProductDescription from "./ProductDescription";
 
 interface Review {
   name: string;
@@ -75,7 +76,7 @@ const ProductTabsWithReviewForm = ({ product }: { product: Product }) => {
       <div className="mt-4">
         {activeTab === "description" && (
           <div>
-            <p className="text-gray-700">{productData.description}</p>
+            <p className="text-gray-700"><ProductDescription description={product.description} /></p>
           </div>
         )}
 

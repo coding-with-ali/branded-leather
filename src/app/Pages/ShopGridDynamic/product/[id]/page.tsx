@@ -20,6 +20,8 @@ import ProductTabsWithReviewForm from "../../../../componets/product-tabs-with-r
 import RelatedProducts from "../../../../componets/RelatedProducts";
 import Question from "@/app/Pages/HomePage/Question";
 import Notification from "../../../../componets/notification";
+import ProductDescription from '../../../../componets/ProductDescription';
+
 
 
 interface Review {
@@ -200,7 +202,7 @@ const ProductDetail: React.FC = () => {
             {/* Description */}
             <div>
               <h3 className="text-lg font-semibold mt-6">Description:</h3>
-              <p className="text-gray-600 text-sm">{product.description}</p>
+              <p className="text-gray-600 text-sm"><ProductDescription description={product.description} /></p>
             </div>
 
             {/* Social Share */}

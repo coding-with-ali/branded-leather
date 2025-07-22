@@ -25,10 +25,11 @@ export const product = {
       validation: (Rule: RuleType) => Rule.required().error('Price is required'),
     },
     {
-      name: 'description',
-      type: 'text',
-      title: 'Description',
-    },
+  name: 'description',
+  title: 'Description',
+  type: 'array',
+  of: [{ type: 'block' }]
+},
     {
       name: 'discountPercentage',
       type: 'number',

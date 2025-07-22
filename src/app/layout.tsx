@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#FFFBF2]" >
+      <body className="bg-white" >
         <ReduxProvider>
         <Header/>
         {children}
