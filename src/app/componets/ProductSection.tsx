@@ -1,12 +1,11 @@
 
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import FilterSection from './FilterSection';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
@@ -16,13 +15,11 @@ interface Product {
   name: string;
   image: any;
   price: number;
-  quantity?: number;
   discountPercentage?: number;
   category?: string;
   description?: string;
   rating?: number;
   reviewCount?: number;
-  primeDelivery?: boolean;
 }
 
 interface Props {
@@ -83,14 +80,14 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
 
   const handleFiltersChange = (filters: Record<string, string[]>) => {
     const result = products.filter((product) => {
-      const matchesCategory =
-        !filters.category ||
-        filters.category.includes(product.category?.toLowerCase() || '');
+      const selectedCategories = [
+        ...(filters.menCategory || []),
+        ...(filters.womenCategory || []),
+      ];
 
-      const discountString = product.discountPercentage ? String(product.discountPercentage) : '';
-      const matchesDiscount =
-        !filters.discountPercentage ||
-        filters.discountPercentage.includes(discountString);
+      const matchesCategory =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(product.category || '');
 
       const matchesPrice =
         !filters.priceRange ||
@@ -109,7 +106,6 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
 
       return (
         matchesCategory &&
-        matchesDiscount &&
         matchesPrice &&
         matchesSearch &&
         matchesCategoryProp
@@ -121,12 +117,10 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
 
   const formatSearchHeading = () => {
     const lower = category.toLowerCase();
-
     if (lower.includes("jacket")) return "Leather Jackets";
     if (lower.includes("bag")) return "Bags";
     if (lower.includes("wallet")) return "Wallets";
     if (searchQuery) return `Search results for "${searchQuery}"`;
-
     return "All Products";
   };
 
@@ -135,11 +129,11 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
       <FilterSection onFiltersChange={handleFiltersChange} />
 
       <div className="bg-white flex-1">
-        <div className="mb-4 text-2xl font-bold text-gray-800 px-2">
+        <div className="mb-4 text-2xl font-bold text-gray-800">
           {formatSearchHeading()}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
           {filteredProducts.length ? (
             filteredProducts.map((product) => {
               const rating = product.rating ?? 0;
@@ -171,7 +165,7 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
                         alt={product.name}
                         width={178}
                         height={178}
-                        className="w-[178px] h-[178px] object-contain"
+                        className="w-[200px] h-[200px] object-cover"
                         priority
                       />
                     </div>

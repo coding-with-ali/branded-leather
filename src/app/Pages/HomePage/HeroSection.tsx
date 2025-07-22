@@ -20,7 +20,7 @@ export default function Herosection() {
           alt="Hero"
           width={900}
           height={900}
-          className='w-[100vw] md:hidden inline-block'
+          className='w-[100vw] h-[50vh] md:hidden inline-block'
         />
       </div>
     </div>

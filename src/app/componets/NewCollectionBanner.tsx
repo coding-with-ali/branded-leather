@@ -5,7 +5,7 @@ import React from 'react';
 
 const NewCollectionBanner = () => {
   return (
-    <div className="bg-white w-full  flex justify-center">
+    <div className=" w-full  flex justify-center">
       <Image
         src="/newcollection.webp"
         alt="New Collection Jacket"

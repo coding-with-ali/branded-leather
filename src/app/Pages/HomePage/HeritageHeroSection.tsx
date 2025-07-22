@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <section className="w-full bg-[#f9f4ed] flex flex-col md:flex-row items-center justify-between gap-8">
+    <section className="w-full h-auto pb-5 bg-[#f9f4ed] flex flex-col md:flex-row items-center justify-between gap-8">
       {/* Left - Image */}
       <div className="w-full md:w-1/2 flex justify-center md:justify-start">
         <Image
