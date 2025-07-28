@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,12 +13,24 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { ShoppingBag } from "lucide-react";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+
+interface Product {
+  _id: string;
+  name: string;
+  image?: any;
+  priceUSD?: string;
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [dropdown, setDropdown] = useState<string | null>(null);
+  const [liveResults, setLiveResults] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const handleSearchSubmit = (e?: React.FormEvent) => {
@@ -26,9 +38,75 @@ export default function Header() {
     if (searchQuery.trim()) {
       router.push(`/search?query=${encodeURIComponent(searchQuery)}`);
       setSearchQuery("");
+      setLiveResults([]);
       setIsSearchOpen(false);
     }
   };
+
+  // ✅ Live search: fetch as user types
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setLiveResults([]);
+      return;
+    }
+
+    const delay = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const data = await client.fetch(
+          `*[_type == "product" && name match "*${searchQuery}*"][0...6]{
+            _id,
+            name,
+            priceUSD,
+            image
+          }`
+        );
+        setLiveResults(data);
+      } catch (err) {
+        console.error("Live search error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }, 250); // debounce
+
+    return () => clearTimeout(delay);
+  }, [searchQuery]);
+
+  const renderLiveResults = () =>
+    liveResults.length > 0 && (
+      <div className="absolute top-full left-0 w-full bg-white shadow-md z-50 max-h-64 overflow-y-auto">
+        {liveResults.map((product) => (
+          <Link
+            key={product._id}
+            href={`/Pages/ShopGridDynamic/product/${product._id}`}
+            className="flex items-center gap-2 p-2 hover:bg-gray-100"
+            onClick={() => {
+              setSearchQuery("");
+              setLiveResults([]);
+              setIsSearchOpen(false);
+            }}
+          >
+            <Image
+              src={product.image ? urlFor(product.image).url() : '/fallback-image.jpg'}
+              alt={product.name}
+              width={178}
+              height={178}
+              className="w-[100px] h-[100px] object-cover"
+              priority
+            />
+            <div className="flex flex-col">
+              <span className="text-sm font-medium">{product.name}</span>
+              {product.priceUSD && (
+                <span className="text-xs text-gray-500">
+                  $
+                  {product.priceUSD}
+                </span>
+              )}
+            </div>
+          </Link>
+        ))}
+      </div>
+    );
 
   return (
     <div>
@@ -50,7 +128,8 @@ export default function Header() {
       </div>
 
       {/* Main Nav */}
-      <div className="bg-[#000] w-full h-fit flex justify-between items-center border-b-2 px-4 md:py-2 sm:px-10">
+      <div className="bg-[#000] w-full flex justify-between items-center border-b-2 px-4 md:py-2 sm:px-10 relative">
+        {/* Left Side */}
         <div className="flex items-center gap-3">
           {isMenuOpen ? (
             <FaTimes
@@ -67,17 +146,18 @@ export default function Header() {
           )}
           <Link href="/">
             <Image
-                    src="/logo.jpg"
-                    alt="Hero"
-                    width={190}
-                    height={190}
-                    className='w-48 h-auto'
-                  />
-              </Link>
+              src="/logo.jpg"
+              alt="Logo"
+              width={190}
+              height={190}
+              className="w-48 h-auto"
+            />
+          </Link>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden xl:flex gap-6 items-center">
+          {/* MEN/WOMEN dropdown */}
           {["MEN", "WOMEN"].map((label) => (
             <div
               key={label}
@@ -113,36 +193,43 @@ export default function Header() {
               )}
             </div>
           ))}
-          <Link href="/" className="text-white font-bold text-[15px]">LEATHER BAG</Link>
-          <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">PRIME DELIVERY</Link>
-          <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">WINTER JACKET</Link>
+          <Link href="/" className="text-white font-bold text-[15px]">
+            LEATHER BAG
+          </Link>
+          <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">
+            PRIME DELIVERY
+          </Link>
+          <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">
+            WINTER JACKET
+          </Link>
         </div>
 
         {/* Desktop Search */}
-        <form
-          onSubmit={handleSearchSubmit}
-          className="hidden md:flex w-[280px] xl:w-[320px] h-[40px] items-center border-2 border-white rounded-md overflow-hidden"
-        >
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-3 text-white bg-[#1c1b1b] outline-none"
-            placeholder="Search products..."
-          />
-          <button type="submit" className="w-[50px] h-[40px] flex items-center justify-center">
-            <FaSearch size="20px" className="text-white" />
-          </button>
-        </form>
-
-        {/* Mobile Search & Cart */}
-        <div className="md:hidden flex items-center gap-3">
-          {/* Expandable Search */}
+        <div className="hidden md:block relative w-[280px] xl:w-[320px]">
           <form
             onSubmit={handleSearchSubmit}
-            className={`flex items-center border-2 border-white rounded-md overflow-hidden transition-all duration-300 ease-in-out ${
-              isSearchOpen ? "w-[200px] pl-2" : "w-[45px]"
-            } bg-[#2d2d2d]`}
+            className="flex w-full h-[40px] items-center border-2 border-white rounded-md overflow-hidden"
+          >
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-3 text-white bg-[#1c1b1b] outline-none"
+              placeholder="Search products..."
+            />
+            <button type="submit" className="w-[50px] h-[40px] flex items-center justify-center">
+              <FaSearch size="20px" className="text-white" />
+            </button>
+          </form>
+          {renderLiveResults()}
+        </div>
+
+        {/* Mobile Search + Cart */}
+        <div className="md:hidden flex items-center gap-3 relative">
+          <form
+            onSubmit={handleSearchSubmit}
+            className={`flex items-center border-2 border-white rounded-md overflow-hidden transition-all duration-300 ease-in-out ${isSearchOpen ? "w-[160px]" : "w-[45px]"
+              } bg-[#2d2d2d] relative`}
           >
             {isSearchOpen && (
               <input
@@ -162,6 +249,9 @@ export default function Header() {
               <FaSearch size="18px" className="text-white" />
             </button>
           </form>
+          {isSearchOpen && (
+            <div className="absolute top-12 left-0 w-[200px]">{renderLiveResults()}</div>
+          )}
 
           <Link href="/Pages/Cart" className="bg-[#c84e4b] p-2 rounded-sm">
             <ShoppingBag color="white" />
@@ -205,9 +295,15 @@ export default function Header() {
               )}
             </div>
           ))}
-          <Link href="/" className="text-white text-[15px] font-extrabold">LEATHER BAG</Link>
-          <Link href="/Pages/ShopList" className="text-white text-[15px] font-extrabold">PRIME DELIVERY</Link>
-          <Link href="/Pages/ShopList" className="text-white text-[15px] font-extrabold">WINTER JACKET</Link>
+          <Link href="/" className="text-white text-[15px] font-extrabold">
+            LEATHER BAG
+          </Link>
+          <Link href="/Pages/ShopList" className="text-white text-[15px] font-extrabold">
+            PRIME DELIVERY
+          </Link>
+          <Link href="/Pages/ShopList" className="text-white text-[15px] font-extrabold">
+            WINTER JACKET
+          </Link>
         </div>
       )}
     </div>

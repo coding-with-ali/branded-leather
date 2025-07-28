@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
@@ -31,22 +30,13 @@ const womenCategories = [
   "Women Wool Jackets",
 ];
 
-const priceRanges = [
-  "0-100",
-  "100-200",
-  "200-300",
-  "300-400",
-  "400-500",
-  "500-600",
-  "600-1000",
-];
-
 interface FilterSectionProps {
   onFiltersChange: (filters: Record<string, string[]>) => void;
 }
 
 const FilterSection = ({ onFiltersChange }: FilterSectionProps) => {
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
   const [showMobileFilter, setShowMobileFilter] = useState(false);
 
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,31 +56,56 @@ const FilterSection = ({ onFiltersChange }: FilterSectionProps) => {
     onFiltersChange(updatedFilters);
   };
 
+  const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const newPrice = { ...priceRange, [name]: Number(value) };
+
+    if (newPrice.min <= newPrice.max) {
+      setPriceRange(newPrice);
+
+      const updatedFilters = {
+        ...selectedFilters,
+        priceRange: [`${newPrice.min}-${newPrice.max}`],
+      };
+
+      setSelectedFilters(updatedFilters);
+      onFiltersChange(updatedFilters);
+    }
+  };
+
   const renderFilterContent = () => (
-    <div className="p-6 space-y-6">
-      {/* PRICE RANGE */}
+    <div className="bg-[#fdf7ee] p-6 space-y-6">
+      {/* PRICE RANGE SLIDER */}
       <div>
         <h3 className="uppercase font-bold text-sm text-gray-900 tracking-wide mb-3">
           Shop by Price
         </h3>
-        <ul className="space-y-2">
-          {priceRanges.map((range) => (
-            <li key={range}>
-              <label className="flex items-center space-x-2 text-sm text-gray-700 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="priceRange"
-                  value={range}
-                  onChange={handleFilterChange}
-                  className="accent-brown-700 w-4 h-4 border-gray-300 rounded"
-                />
-                <span className="hover:text-brown-700">
-                  ${range.replace("-", " - $")}
-                </span>
-              </label>
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between text-sm text-gray-700">
+            <span>${priceRange.min}</span>
+            <span>${priceRange.max}</span>
+          </div>
+          <input
+            type="range"
+            name="min"
+            min="0"
+            max="1000"
+            step="50"
+            value={priceRange.min}
+            onChange={handlePriceChange}
+            className="w-full accent-brown-700"
+          />
+          <input
+            type="range"
+            name="max"
+            min="0"
+            max="1000"
+            step="50"
+            value={priceRange.max}
+            onChange={handlePriceChange}
+            className="w-full accent-brown-700"
+          />
+        </div>
       </div>
 
       {/* MEN COLLECTION */}
@@ -144,7 +159,7 @@ const FilterSection = ({ onFiltersChange }: FilterSectionProps) => {
   return (
     <>
       {/* DESKTOP FILTER SIDEBAR */}
-      <aside className="hidden lg:block w-full max-w-xs bg-white border rounded-md shadow-sm sticky top-24 h-fit">
+      <aside className="bg-[#fdf7ee] hidden lg:block w-full max-w-xs sticky top-24 h-fit">
         <div className="flex justify-between items-center px-4 py-3 border-b">
           <h2 className="font-semibold text-gray-800 text-lg">Filter</h2>
         </div>

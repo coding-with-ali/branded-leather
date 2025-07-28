@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useRef } from 'react';
@@ -27,16 +28,22 @@ export default function LeatherJacket({ products }: Props) {
   };
 
   return (
-    <section className="px-4 md:px-10 xl:px-20 py-10 xl:py-16">
+    <section className="px-4 md:px-10 xl:px-40 py-10 xl:py-16">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl md:text-4xl font-bold tracking-wide text-black uppercase border-b-4 border-[#955e28] inline-block">
           Leather Jackets
         </h2>
-        <div className="hidden md:flex gap-2 text-white">
-          <button onClick={scrollLeft} className="w-10 h-10 bg-[#955e28] hover:bg-[#7a4b1f] flex items-center justify-center rounded-full">
+        <div className="flex lg:hidden gap-2 text-white">
+          <button
+            onClick={scrollLeft}
+            className="w-10 h-10 bg-[#955e28] hover:bg-[#7a4b1f] flex items-center justify-center rounded-full"
+          >
             &#8249;
           </button>
-          <button onClick={scrollRight} className="w-10 h-10 bg-[#955e28] hover:bg-[#7a4b1f] flex items-center justify-center rounded-full">
+          <button
+            onClick={scrollRight}
+            className="w-10 h-10 bg-[#955e28] hover:bg-[#7a4b1f] flex items-center justify-center rounded-full"
+          >
             &#8250;
           </button>
         </div>
@@ -45,68 +52,129 @@ export default function LeatherJacket({ products }: Props) {
       {products.length === 0 ? (
         <p className="text-center text-gray-500 mt-8">No products available.</p>
       ) : (
-        <div ref={scrollRef} className="flex gap-4 mt-8 overflow-x-auto scroll-smooth scrollbar-hide">
-          {products.map((product) => (
-            <article
-              key={product._id}
-              className="min-w-[250px] md:min-w-[280px] bg-white border border-gray-200 rounded-md shadow-sm transition-transform duration-300 hover:scale-105"
-            >
-              <Link href={`/Pages/ShopGridDynamic/product/${product._id}`} className="flex flex-col items-center">
-                <div className="bg-white w-full h-[240px] md:h-[300px] flex items-center justify-center rounded-t-md">
-                  <Image
-                    src={product.image ? urlFor(product.image).url() : '/fallback-image.jpg'}
-                    alt={product.name || 'Product Image'}
-                    width={250}
-                    height={250}
-                    className="object-contain max-h-full"
-                  />
-                </div>
-
-                <div className="w-[240px] px-4 py-3">
-                  <div className="flex justify-between text-[12px] font-bold mb-1">
-                    <span className="bg-[#3c1e10] text-white px-2 py-[2px] rounded-sm">Free Delivery</span>
-                    <span className="text-black">{product.discountPercentage}% OFF  </span>
+        <>
+          {/* Scrollable layout for mobile & tablet */}
+          <div ref={scrollRef} className="flex gap-2 mt-8 overflow-x-auto scroll-smooth scrollbar-hide lg:hidden">
+            {products.map((product) => (
+              <article
+                key={product._id}
+                className="min-w-[250px] md:min-w-[280px] bg-white shadow-sm transition-transform duration-300 hover:scale-105"
+              >
+                <Link href={`/Pages/ShopGridDynamic/product/${product._id}`} className="flex flex-col items-center">
+                  <div className="bg-white w-full h-[240px] md:h-[300px] flex items-center justify-center rounded-t-md">
+                    <Image
+                      src={product.image ? urlFor(product.image).url() : '/fallback-image.jpg'}
+                      alt={product.name || 'Product Image'}
+                      width={250}
+                      height={250}
+                      className="object-contain max-h-full"
+                    />
                   </div>
 
-                 <h3 className="text-sm md:text-base font-semibold text-black leading-snug">{product.name}</h3>
+                  <div className="w-[240px] px-4 py-3">
+                    <div className="flex justify-between text-[12px] font-bold mb-1">
+                      <span className="bg-[#3c1e10] text-white px-2 py-[2px] rounded-sm">Free Delivery</span>
+                      <span className="text-black">{product.discountPercentage}% OFF</span>
+                    </div>
 
+                    <h3 className="text-sm lg:text-base font-bold text-black leading-snug">
+                      {product.name.length > 28 ? product.name.slice(0, 28) + '...' : product.name}
+                    </h3>
 
-                  <div className="flex items-center mt-1">
-                    {Array.from({ length: 5 }).map((_, idx) => (
-                      <Star
-                        key={idx}
-                        size={14}
-                        className={`${
-                          idx + 1 <= Math.round(product.rating ?? 0)
-                            ? 'fill-yellow-500 stroke-yellow-500'
-                            : 'stroke-gray-300'
-                        }`}
-                      />
-                    ))}
+                    <div className=" flex items-center gap-2 text-[14px]">
+                      <span className="line-through text-gray-400">
+                        $
+                        {product.discountPercentage
+                          ? (product.price / (1 - product.discountPercentage / 100)).toFixed(2)
+                          : (product.price + 30).toFixed(2)}
+                      </span>
+                      <span className="font-bold text-black">${product.price.toFixed(2)}</span>
+                    </div>
+
+                    <div className="flex items-center mt-1">
+                      {Array.from({ length: 5 }).map((_, idx) => (
+                        <Star
+                          key={idx}
+                          size={14}
+                          className={`${idx + 1 <= Math.round(product.rating ?? 0)
+                              ? 'fill-yellow-500 stroke-yellow-500'
+                              : 'stroke-gray-300'
+                            }`}
+                        />
+                      ))}
+                    </div>
+
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          {/* Grid layout for laptop and up (only 8 products) */}
+          <div className="hidden lg:grid mt-8 grid-cols-4 gap-2">
+            {products.slice(0, 8).map((product) => (
+              <article
+                key={product._id}
+                className="bg-white transition-transform duration-300 hover:scale-105"
+              >
+                <Link href={`/Pages/ShopGridDynamic/product/${product._id}`} className="flex flex-col items-center">
+                  <div className="bg-white w-full h-[300px] flex items-center justify-center rounded-t-md">
+                    <Image
+                      src={product.image ? urlFor(product.image).url() : '/fallback-image.jpg'}
+                      alt={product.name || 'Product Image'}
+                      width={250}
+                      height={250}
+                      className="object-contain max-h-full"
+                    />
                   </div>
 
-                  <div className="mt-2 flex items-center gap-2 text-[14px]">
-                    <span className="line-through text-gray-400">
-  ${product.discountPercentage
-    ? (product.price / (1 - product.discountPercentage / 100)).toFixed(2)
-    : (product.price + 30).toFixed(2) // fallback if no discount is given
-  }
-</span>
-                    <span className="font-bold text-black">${product.price.toFixed(2)}</span>
+                  <div className="w-[250px] py-3">
+                    <div className="flex justify-between text-[12px] font-bold mb-1">
+                      <span className="bg-[#3c1e10] text-white px-2 py-[2px] rounded-sm">Free Delivery</span>
+                      <span className="text-black">{product.discountPercentage}% OFF</span>
+                    </div>
+
+                    <h3 className="text-sm md:text-base font-bold text-black leading-snug">
+                      {product.name.length > 27 ? product.name.slice(0, 27) + '...' : product.name}
+                    </h3>
+
+                    <div className=" flex items-center gap-2 text-[14px]">
+                      <span className="line-through text-gray-400">
+                        $
+                        {product.discountPercentage
+                          ? (product.price / (1 - product.discountPercentage / 100)).toFixed(2)
+                          : (product.price + 30).toFixed(2)}
+                      </span>
+                      <span className="font-bold text-black">${product.price.toFixed(2)}</span>
+                    </div>
+
+                    <div className="flex items-center mt-1">
+                      {Array.from({ length: 5 }).map((_, idx) => (
+                        <Star
+                          key={idx}
+                          size={14}
+                          className={`${idx + 1 <= Math.round(product.rating ?? 0)
+                              ? 'fill-yellow-500 stroke-yellow-500'
+                              : 'stroke-gray-300'
+                            }`}
+                        />
+                      ))}
+                    </div>
+
                   </div>
-                </div>
-              </Link>
-            </article>
-          ))}
-        </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </>
       )}
 
       <div className="flex justify-center mt-8">
-        <button className="bg-[#955e28] text-white text-sm font-semibold px-6 py-3 rounded hover:bg-[#7a4b1f]">
-          <Link href="/Pages/PageHero/jacket">
-          VIEW MORE
-          </Link>
-        </button>
+        <Link href="/Pages/PageHero/jacket">
+          <button className="bg-[#955e28] text-white text-sm font-semibold px-6 py-3 rounded hover:bg-[#7a4b1f]">
+            VIEW MORE
+          </button>
+        </Link>
       </div>
     </section>
   );

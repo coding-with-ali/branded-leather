@@ -7,7 +7,7 @@ function Notification({
   product,
   onAddToCart,
 }: {
-  product: { _id: string; name: string; quantity: number, image:string };
+  product: { _id: string; name: string; quantity: number, image:string, price:number };
   onAddToCart: () => void;
 }) {
   const handleAdd = () => {
@@ -29,7 +29,7 @@ function Notification({
     <div>
       <button
         onClick={handleAdd}
-        className="inline-block bg-[#99582a] text-white px-6 py-3 rounded-lg mt-4 transition"
+        className="inline-block bg-[#99582a] text-white px-28 md:px-10 lg:px-32 py-2 rounded-full  transition font-bold"
       >
         Add To Cart
       </button>

@@ -70,7 +70,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10 px-4 md:px-10">
+    <div className="bg-[#fdf7ee] min-h-screen py-10 px-4 md:px-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
         {/* Left Form Section */}
         <div className="flex-1 bg-white p-6 rounded-md shadow border">

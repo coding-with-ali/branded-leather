@@ -5,18 +5,17 @@ import { useSearchParams } from "next/navigation";
 import ProductSection from "../componets/ProductSection"; // Adjust the path if needed
 import NewCollectionBanner from "../componets/NewCollectionBanner";
 import Question from "../Pages/HomePage/Question"
+import Featured from "../componets/featured";
+import LiveSearch from "../componets/LiveSearch";
 
 export default function SearchPageContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
 
   return (
-    <div className="bg-white p-4">
+    <div className="bg-[#fdf7ee] p-4">
        <NewCollectionBanner />
-      <h1 className="text-2xl font-bold mb-6 text-[#3d3d3d]">
-        Search Results for <span className="text-[#7E33E0]">&quot;{query}&quot;</span>
-      </h1>
-
+       <Featured/>
       {/* ✅ Inject ProductSection and pass the query */}
       <ProductSection searchQuery={query} />
       <Question/> 

@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface CartItem {
   _id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
   quantity: number;
   size?: string; // Optional, but used in logic

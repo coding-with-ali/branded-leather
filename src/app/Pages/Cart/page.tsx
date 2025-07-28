@@ -14,7 +14,7 @@ import RelatedProducts from "@/app/componets/RelatedProducts";
 interface CartItem {
   _id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
   quantity: number;
   size?: string;
@@ -47,9 +47,9 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#fdf7ee]">
       {/* Main Content */}
-      <div className="bg-white text-black max-w-screen-xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="bg-[#fdf7ee] text-black max-w-screen-xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Product List */}
         <div className="col-span-2 space-y-6">
           {cartItems.length === 0 ? (
@@ -90,6 +90,7 @@ const Cart: React.FC = () => {
                     </button>
                   </div>
                   <h5 className="text-lg font-medium text-gray-600 mt-2">
+                    $
                     {item.price}
                   </h5>
                 </div>
@@ -123,7 +124,9 @@ const Cart: React.FC = () => {
           </div>
         </div>
       </div>
-        <RelatedProducts/>
+        <div className="mx-1 md:mx-20 lg:mx-48">
+        <RelatedProducts />
+      </div>
     </div>
   );
 };

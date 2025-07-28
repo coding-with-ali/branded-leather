@@ -79,7 +79,7 @@ export const product = {
             },
             {
               name: 'description',
-              type: 'text',
+              type: 'string',
               title: 'Review Description',
             },
           ],
@@ -94,3 +94,5 @@ export const product = {
 }
   ],
 };
+
+

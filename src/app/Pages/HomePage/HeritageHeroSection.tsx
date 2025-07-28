@@ -17,12 +17,12 @@ export default function HeroSection() {
 
       {/* Right - Text */}
       <div className="w-full md:w-1/2 text-left font-serif mt-8 px-5 md:py-3 md:mt-0">
-        <h1 className="text-xl md:text-4xl font-bold text-black leading-tight">
+        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold text-black leading-tight">
           INSPIRED BY HERITAGE.
           <br />
           BUILT FOR <span className="text-[#955e28]">GENERATIONS.</span>
         </h1>
-        <p className="text-[12px] md:text-lg text-gray-700 mt-6 max-w-xl">
+        <p className="text-[12px] md:text-md lg:text-lg text-gray-700 mt-6 max-w-xl">
           GENUINE FULL GRAIN LEATHER. DURABLE HARDWARE AND FINISHINGS. IF IT BEARS THE TGL NAME, IT’S MADE FOR THE LONG HAUL.
         </p>
 

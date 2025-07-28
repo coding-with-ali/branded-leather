@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -34,16 +33,23 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetched: any[] = await client.fetch(`*[_type == "product"]{
-          _id,
-          name,
-          image,
-          priceUSD,
-          discountPercentage,
-          category->{title},
-          description,
-          reviews
-        }`);
+        // ✅ GROQ: fetch only products matching the query (single-letter works)
+        const fetched: any[] = await client.fetch(
+          `*[_type == "product" &&
+            (!defined($searchQuery) || name match "*${searchQuery}*") &&
+            (!defined($category) || category->title match "*${category}*")
+          ]{
+            _id,
+            name,
+            image,
+            priceUSD,
+            discountPercentage,
+            category->{title},
+            description,
+            reviews
+          }`,
+          { searchQuery, category }
+        );
 
         const normalised: Product[] = fetched.map((p) => ({
           _id: p._id,
@@ -59,17 +65,8 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
           reviewCount: p.reviews?.length || 0,
         }));
 
-        const searched = normalised.filter((product) => {
-          const nameMatch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-          const categoryMatch = category
-            ? (product.category?.toLowerCase().includes(category.toLowerCase()) ?? false)
-            : true;
-
-          return nameMatch && categoryMatch;
-        });
-
         setProducts(normalised);
-        setFilteredProducts(searched);
+        setFilteredProducts(normalised); // already filtered by query
       } catch (err) {
         console.error('Error fetching products:', err);
       }
@@ -125,15 +122,15 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
   };
 
   return (
-    <section className="bg-white flex flex-col lg:flex-row gap-1">
+    <section className="bg-[#fdf7ee] flex flex-col lg:flex-row gap-1 pt-10">
       <FilterSection onFiltersChange={handleFiltersChange} />
 
-      <div className="bg-white flex-1">
+      <div className="bg-[#fdf7ee] flex-1">
         <div className="mb-4 text-2xl font-bold text-gray-800">
           {formatSearchHeading()}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredProducts.length ? (
             filteredProducts.map((product) => {
               const rating = product.rating ?? 0;
@@ -146,7 +143,7 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
               return (
                 <article
                   key={product._id}
-                  className="h-[400px] relative flex flex-col bg-white border border-gray-200 shadow-md rounded overflow-hidden"
+                  className="h-fit lg:w-[280px] relative flex flex-col bg-white border border-gray-200 shadow-md rounded overflow-hidden"
                 >
                   <div className="absolute top-2 left-2 bg-[#3b0a0a] text-white text-[10px] font-semibold px-2 py-1 rounded uppercase z-10">
                     Free Delivery
@@ -171,8 +168,14 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
                     </div>
 
                     <div className="p-3 flex flex-col gap-1">
-                      <h3 className="text-black text-[15px] md:text-[17px] font-semibold leading-tight line-clamp-2">
-                        {product.name}
+                      {/* Mobile */}
+                      <h3 className="text-sm font-bold text-black leading-snug block lg:hidden">
+                        {product.name.length > 15 ? product.name.slice(0, 15) + '...' : product.name}
+                      </h3>
+
+                      {/* Desktop */}
+                      <h3 className="text-sm lg:text-base font-bold text-black leading-snug hidden lg:block">
+                        {product.name.length > 25 ? product.name.slice(0, 25) + '...' : product.name}
                       </h3>
 
                       <div className="flex items-center gap-1">
@@ -212,3 +215,4 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
 };
 
 export default ProductSection;
+  
