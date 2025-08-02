@@ -43,7 +43,6 @@ export default function Header() {
     }
   };
 
-  // ✅ Live search: fetch as user types
   useEffect(() => {
     if (searchQuery.trim() === "") {
       setLiveResults([]);
@@ -67,7 +66,7 @@ export default function Header() {
       } finally {
         setLoading(false);
       }
-    }, 250); // debounce
+    }, 250);
 
     return () => clearTimeout(delay);
   }, [searchQuery]);
@@ -87,7 +86,7 @@ export default function Header() {
             }}
           >
             <Image
-              src={product.image ? urlFor(product.image).url() : '/fallback-image.jpg'}
+              src={product.image ? urlFor(product.image).url() : "/fallback-image.jpg"}
               alt={product.name}
               width={178}
               height={178}
@@ -97,10 +96,7 @@ export default function Header() {
             <div className="flex flex-col">
               <span className="text-sm font-medium">{product.name}</span>
               {product.priceUSD && (
-                <span className="text-xs text-gray-500">
-                  $
-                  {product.priceUSD}
-                </span>
+                <span className="text-xs text-gray-500">${product.priceUSD}</span>
               )}
             </div>
           </Link>
@@ -108,27 +104,29 @@ export default function Header() {
       </div>
     );
 
+  const getDropdownItems = (label: string) =>
+    label === "MEN"
+      ? [
+          { name: "Leather Jackets", slug: "leatherJacket" },
+          { name: "Black Leather Jackets", slug: "BlackLeatherJacket" },
+          { name: "Brown Leather Jackets", slug: "BrownLeatherJacket" },
+          { name: "Biker Jackets", slug: "MotorcycleJacket" },
+          { name: "Cafe Racer Jackets", slug: "CafeRacerJacket" },
+          { name: "Bomber Jackets", slug: "BomberJacket" },
+        ]
+      : [
+          { name: "Leather Jackets", slug: "leatherJacket" },
+          { name: "Black Leather Jackets", slug: "BlackLeatherJacket" },
+          { name: "Brown Leather Jackets", slug: "BrownLeatherJacket" },
+          { name: "Biker Jackets", slug: "MotorcycleJacket" },
+          { name: "Cafe Racer Jackets", slug: "CafeRacerJacket" },
+          { name: "Bomber Jackets", slug: "BomberJacket" },
+        ];
+
   return (
     <div>
-      {/* Top Bar */}
-      <div className="bg-[#ffc78e] px-4 py-2 text-sm font-semibold text-center md:flex md:justify-between md:items-center md:px-10">
-        <div className="hidden md:flex items-center gap-2">
-          <span>Follow Us:</span>
-          <FaFacebookF />
-          <FaInstagram />
-          <FaPinterestP />
-          <FaYoutube />
-        </div>
-        <div>
-          🔥 Extra Save $15 Today! Use Code: <b>SAVE15</b>
-        </div>
-        <Link href="/Pages/Cart" className="hidden md:flex bg-[#c84e4b] p-2 rounded-sm">
-          <ShoppingBag color="white" />
-        </Link>
-      </div>
-
       {/* Main Nav */}
-      <div className="bg-[#000] w-full flex justify-between items-center border-b-2 px-4 md:py-2 sm:px-10 relative">
+      <div className="bg-[#000] w-full flex justify-between items-center px-4 py-2 sm:px-10 relative">
         {/* Left Side */}
         <div className="flex items-center gap-3">
           {isMenuOpen ? (
@@ -145,19 +143,12 @@ export default function Header() {
             />
           )}
           <Link href="/">
-            <Image
-              src="/logo.jpg"
-              alt="Logo"
-              width={190}
-              height={190}
-              className="w-48 h-auto"
-            />
+            <Image src="/logo.jpg" alt="Logo" width={190} height={190} className="w-48 h-auto" />
           </Link>
         </div>
 
         {/* Desktop Nav */}
         <div className="hidden xl:flex gap-6 items-center">
-          {/* MEN/WOMEN dropdown */}
           {["MEN", "WOMEN"].map((label) => (
             <div
               key={label}
@@ -169,34 +160,23 @@ export default function Header() {
                 {label} ▾
               </button>
               {dropdown === label && (
-                <ul className="absolute top-full left-0 z-50 bg-white text-black w-[250px] shadow-md border mt-2">
-                  {[
-                    "Biker Jackets",
-                    "Artificial Leather Jackets",
-                    "Fleece Hoodie",
-                    "Black and Brown Jackets",
-                    "Denim Jackets",
-                    "Casual and Formal Jackets",
-                    "Long Coats",
-                    "Leather Vests",
-                    "Cotton Jackets",
-                    "T-Shirts",
-                  ].map((item) => (
+                <ul className="absolute top-full left-0 z-50 bg-white text-black font-bold font-sans w-[250px] shadow-md border mt-2">
+                  {getDropdownItems(label).map((item) => (
                     <li
-                      key={item}
-                      className="px-4 py-2 hover:bg-[#1f1f1f] hover:text-white cursor-pointer"
+                      key={item.slug}
+                      className="px-4 py-2 hover:bg-[#1f1f1f] hover:text-white"
                     >
-                      {item}
+                      <Link href={`/Pages/Category/${label}/${item.slug}`}>{item.name}</Link>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
           ))}
-          <Link href="/" className="text-white font-bold text-[15px]">
+          <Link href="/Pages/PageHero/bags" className="text-white font-bold text-[15px]">
             LEATHER BAG
           </Link>
-          <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">
+          <Link href="/Pages/PageHero/jacket" className="text-white font-bold text-[15px]">
             PRIME DELIVERY
           </Link>
           <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">
@@ -223,13 +203,19 @@ export default function Header() {
           </form>
           {renderLiveResults()}
         </div>
+        <div>
+          <Link href="/Pages/Cart" className="hidden md:flex bg-[#c84e4b] p-2 rounded-sm">
+          <ShoppingBag color="white" />
+        </Link>
+        </div>
 
         {/* Mobile Search + Cart */}
         <div className="md:hidden flex items-center gap-3 relative">
           <form
             onSubmit={handleSearchSubmit}
-            className={`flex items-center border-2 border-white rounded-md overflow-hidden transition-all duration-300 ease-in-out ${isSearchOpen ? "w-[160px]" : "w-[45px]"
-              } bg-[#2d2d2d] relative`}
+            className={`flex items-center border-2 border-white rounded-md overflow-hidden transition-all duration-300 ease-in-out ${
+              isSearchOpen ? "w-[160px]" : "w-[45px]"
+            } bg-[#2d2d2d] relative`}
           >
             {isSearchOpen && (
               <input
@@ -271,31 +257,25 @@ export default function Header() {
                 {label} ▾
               </button>
               {dropdown === label && (
-                <ul className="absolute top-full left-1/2 transform -translate-x-1/2 z-50 bg-white text-black w-[250px] shadow-md border mt-2">
-                  {[
-                    "Biker Jackets",
-                    "Artificial Leather Jackets",
-                    "Fleece Hoodie",
-                    "Black and Brown Jackets",
-                    "Denim Jackets",
-                    "Casual and Formal Jackets",
-                    "Long Coats",
-                    "Leather Vests",
-                    "Cotton Jackets",
-                    "T-Shirts",
-                  ].map((item) => (
+                <ul className="absolute top-full left-1/2 transform -translate-x-1/2 z-50 bg-white font-bold font-sans text-black w-[250px] shadow-md border mt-2">
+                  {getDropdownItems(label).map((item) => (
                     <li
-                      key={item}
+                      key={item.slug}
                       className="px-4 py-2 hover:bg-[#1f1f1f] hover:text-white cursor-pointer"
                     >
-                      {item}
+                      <Link
+                        href={`/Pages/Category/${label}/${item.slug}`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
           ))}
-          <Link href="/" className="text-white text-[15px] font-extrabold">
+          <Link href="/Pages/PageHero/bags" className="text-white text-[15px] font-extrabold">
             LEATHER BAG
           </Link>
           <Link href="/Pages/ShopList" className="text-white text-[15px] font-extrabold">

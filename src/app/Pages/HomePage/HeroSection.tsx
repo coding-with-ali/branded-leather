@@ -5,7 +5,7 @@ export default function Herosection() {
   return (
     <div>
       {/* Right Section */}
-      <div className="">
+      <div className="bg-black">
 
         {/* Hero Image */}
         <Image

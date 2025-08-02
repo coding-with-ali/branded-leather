@@ -170,7 +170,7 @@ export default function LeatherBag({ products }: Props) {
       )}
 
       <div className="flex justify-center mt-8">
-        <Link href="/Pages/PageHero/jacket">
+        <Link href="/Pages/PageHero/bags">
           <button className="bg-[#955e28] text-white text-sm font-semibold px-6 py-3 rounded hover:bg-[#7a4b1f]">
             VIEW MORE
           </button>

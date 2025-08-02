@@ -117,6 +117,16 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
     if (lower.includes("jacket")) return "Leather Jackets";
     if (lower.includes("bag")) return "Bags";
     if (lower.includes("wallet")) return "Wallets";
+    if (lower.includes("Men Motorcycle Jacket")) return "Men Motorcycle Jackets";
+    if (lower.includes("Men Black Jacket")) return "Men Black Jacket";
+    if (lower.includes("Men Brown Jacket")) return "Men Brown Jacket";
+    if (lower.includes("Men Bomber Jacket")) return "Men Bomber Jackets";
+    if (lower.includes("Men  Cafe Racer Jacket")) return "Men  Cafe Racer Jackets";
+   if (lower.includes("Women Motorcycle Jacket")) return "Women Motorcycle Jackets";
+    if (lower.includes("Women Black Jacket")) return "Women Black Jacket";
+    if (lower.includes("Women Brown Jacket")) return "Women Brown Jacket";
+    if (lower.includes("Women Bomber Jacket")) return "Women Bomber Jackets";
+    if (lower.includes("Women  Cafe Racer Jacket")) return "Women  Cafe Racer Jackets";
     if (searchQuery) return `Search results for "${searchQuery}"`;
     return "All Products";
   };
@@ -130,7 +140,7 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
           {formatSearchHeading()}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
           {filteredProducts.length ? (
             filteredProducts.map((product) => {
               const rating = product.rating ?? 0;
@@ -145,12 +155,12 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
                   key={product._id}
                   className="h-fit lg:w-[280px] relative flex flex-col bg-white border border-gray-200 shadow-md rounded overflow-hidden"
                 >
-                  <div className="absolute top-2 left-2 bg-[#3b0a0a] text-white text-[10px] font-semibold px-2 py-1 rounded uppercase z-10">
-                    Free Delivery
+                  <div className="absolute top-2 left-2 bg-[#3b0a0a] text-white text-[8px] md:text-[10px] font-semibold px-2 py-1 rounded uppercase z-10">
+                    Prime Delivery
                   </div>
 
                   {discount > 0 && (
-                    <div className="absolute top-2 right-2 text-xs font-bold text-black bg-white px-2 py-1 rounded shadow">
+                    <div className="absolute top-2 right-2 text-[8px] md:text-[10px] font-bold text-black bg-white px-2 py-1 rounded shadow">
                       {discount}% OFF
                     </div>
                   )}

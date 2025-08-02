@@ -31,18 +31,13 @@ export default function Footer() {
         <div>
           <h3 className="text-[20px] font-bold text-white mb-3">Explore</h3>
           <ul className="space-y-2 text-white text-[14px]">
-            <li><Link href="/mens-jackets" className="hover:underline">MEN&rsquo;S JACKETS</Link></li>
-            <li><Link href="/womens-jackets" className="hover:underline">WOMEN&rsquo;S JACKETS</Link></li>
-            <li><Link href="/leather-bags" className="hover:underline">LEATHER BAGS</Link></li>
+            <li><Link href="/Pages/Category/MEN/LeatherJacket" className="hover:underline">MEN&rsquo;S JACKETS</Link></li>
+            <li><Link href="/Pages/Category/WOMEN/LeatherJacket" className="hover:underline">WOMEN&rsquo;S JACKETS</Link></li>
+            <li><Link href="/Pages/PageHero/bags" className="hover:underline">LEATHER BAGS</Link></li>
             <li><Link href="/winter-jackets" className="hover:underline">WINTER JACKETS</Link></li>
-            <li><Link href="/aviator-jackets" className="hover:underline">AVIATOR JACKETS</Link></li>
-            <li><Link href="/distressed-jackets" className="hover:underline">DISTRESSED JACKETS</Link></li>
-            <li><Link href="/leather-vest" className="hover:underline">LEATHER VEST</Link></li>
-            <li><Link href="/biker-jackets" className="hover:underline">BIKER JACKETS</Link></li>
-            <li><Link href="/fur-jackets" className="hover:underline">FUR JACKETS</Link></li>
-            <li><Link href="/cafe-racer-jackets" className="hover:underline">CAFE RACER JACKETS</Link></li>
-            <li><Link href="/bomber-jackets" className="hover:underline">BOMBER JACKETS</Link></li>
-            <li><Link href="/custom-jackets" className="hover:underline">CUSTOM JACKETS</Link></li>
+            <li><Link href="/Pages/Category/MEN/MotorcycleJacket" className="hover:underline">BIKER JACKETS</Link></li>
+            <li><Link href="/Pages/Category/MEN/CafeRacerJacket" className="hover:underline">CAFE RACER JACKETS</Link></li>
+            <li><Link href="/Pages/Category/MEN/BomberJacket" className="hover:underline">BOMBER JACKETS</Link></li>
           </ul>
         </div>
 
