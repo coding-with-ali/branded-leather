@@ -23,7 +23,7 @@ export default function BottomHero() {
       </div>
       <div className="w-full md:w-1/2 flex justify-center md:justify-start">
         <Image
-          src="/bottom hero.webp"
+          src="/bottom hero.jpg"
           alt="Leather Bag Hero"
           width={600}
           height={600}

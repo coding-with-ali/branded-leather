@@ -7,7 +7,7 @@ export default function HeroSection() {
       {/* Left - Image */}
       <div className="w-full md:w-1/2 flex justify-center md:justify-start">
         <Image
-          src="/6.webp"
+          src="/6.jpg"
           alt="Leather Bag Hero"
           width={600}
           height={600}
@@ -28,7 +28,7 @@ export default function HeroSection() {
 
         
         <button className="mt-4 md:mt-8 bg-[#955e28] hover:bg-[#7a4b1f] text-white px-2 py-2 md:px-6 md:py-3 font-semibold rounded">
-        <Link href="/Pages/PageHero/bags">
+        <Link href="/Pages/PageHero/jacket">
           SIGNATURE COLLECTION
           </Link>
         </button>

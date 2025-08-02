@@ -9,19 +9,19 @@ export default function BannerSection() {
     {
       title: 'TOP RATED ',
       description:"BEST SELLING",
-      image: '/best selling.webp',
+      image: '/best selling.jpg',
       link: '/Pages/PageHero/bags',
     },
     {
       title: 'Classic pieces',
       description:" OUT DOOR APPERAL",
-      image: '/out door.webp',
+      image: '/out door.jpg',
       link: '/Pages/PageHero/jacket',
     },
     {
       title: 'New listing',
       description: "LEATHER PURSE",
-      image: '/leather purse.webp',
+      image: '/leather-purse.jpg',
       link: '/Pages/PageHero/wallet',
     },
   ];

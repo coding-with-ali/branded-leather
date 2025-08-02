@@ -14,7 +14,7 @@ export default function HomePageHero() {
         {/* Top Center */}
         <div className="absolute top-[-10%] left-1/2 transform -translate-x-1/2 text-center flex flex-col items-center">
        <Link href="/Pages/PageHero/jacket">
-          <Image src="/1.webp" alt="Leather Jackets" width={200} height={200} 
+          <Image src="/1.png" alt="Leather Jackets" width={200} height={200} 
           className="w-[150px] h-[150px] md:w-[200px] md:h-[200px]"
           />
           </Link>
@@ -23,7 +23,7 @@ export default function HomePageHero() {
         {/* Left Top */}
         <div className="absolute top-28 md:top-[10%] left-[10%] text-center flex flex-col items-center">
        <Link href="/Pages/PageHero/jacket">
-          <Image src="/2.webp" alt="Premium Jackets" width={150} height={150}
+          <Image src="/2.png" alt="Premium Jackets" width={150} height={150}
           className="w-[130px] h-[130px] md:w-[150px] md:h-[150px]" />
         </Link>
         </div>
@@ -32,7 +32,7 @@ export default function HomePageHero() {
         {/* Right Top */}
         <div className="absolute top-28 md:top-[10%] right-[10%] text-center flex flex-col items-center">
        <Link href="/Pages/PageHero/jacket">
-          <Image src="/4.webp" alt="Leather Vest" width={150} height={150} 
+          <Image src="/3.png" alt="Leather Vest" width={150} height={150} 
           className="w-[130px] h-[130px] md:w-[150px] md:h-[150px]"/>
         </Link>
         </div>
@@ -40,7 +40,7 @@ export default function HomePageHero() {
         {/* Bottom Left */}
         <div className="absolute bottom-8 md:bottom-[10%] left-[10%] text-center flex flex-col items-center">
        <Link href="/Pages/PageHero/bags">
-          <Image src="/3.webp" alt="Leather Bags" width={135} height={135} 
+          <Image src="/4.png" alt="Leather Bags" width={135} height={135} 
           className="w-[120px] h-[130px] md:w-[135px] md:h-[135px]"/>
           </Link>
         </div>
@@ -48,7 +48,7 @@ export default function HomePageHero() {
         {/* Bottom Right */}
         <div className="absolute bottom-8 md:bottom-[10%] right-[10%] text-center flex flex-col items-center">
        <Link href="/Pages/PageHero/wallet">
-          <Image src="/5.webp" alt="Leather Wallets" width={135} height={135} 
+          <Image src="/5.png" alt="Leather Wallets" width={135} height={135} 
           className="w-[120px] h-[130px] md:w-[135px] md:h-[135px]"/>
         </Link>
         </div>
