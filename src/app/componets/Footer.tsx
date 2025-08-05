@@ -45,16 +45,12 @@ export default function Footer() {
         <div>
           <h3 className="text-[20px] font-bold text-white mb-3">Help?</h3>
           <ul className="space-y-2 text-white text-[14px]">
-            <li><Link href="/our-story" className="hover:underline">OUR STORY</Link></li>
-            <li><Link href="/size-guide" className="hover:underline">SIZE GUIDE</Link></li>
-            <li><Link href="/faqs" className="hover:underline">FAQs</Link></li>
-            <li><Link href="/blogs" className="hover:underline">BLOGS</Link></li>
+            <li><Link href="/Pages/SizeGuide" className="hover:underline">SIZE GUIDE</Link></li>
             <li><Link href="/contact-us" className="hover:underline">CONTACT US</Link></li>
-            <li><Link href="/privacy-policy" className="hover:underline">PRIVACY POLICY</Link></li>
-            <li><Link href="/delivery-shipping" className="hover:underline">DELIVERY &amp; SHIPPING</Link></li>
-            <li><Link href="/terms-conditions" className="hover:underline">TERMS &amp; CONDITION</Link></li>
-            <li><Link href="/return-exchange" className="hover:underline">RETURN &amp; EXCHANGE POLICY</Link></li>
-            <li><Link href="/customer-support" className="hover:underline">CUSTOMER SUPPORT</Link></li>
+            <li><Link href="/Pages/Policy" className="hover:underline">PRIVACY POLICY</Link></li>
+            <li><Link href="/Pages/Delivery" className="hover:underline">DELIVERY &amp; SHIPPING</Link></li>
+            <li><Link href="/Pages/Term" className="hover:underline">TERMS &amp; CONDITION</Link></li>
+            <li><Link href="/Pages/ExchangePolicy" className="hover:underline">RETURN &amp; EXCHANGE POLICY</Link></li>
             <li><Link href="/Pages/order-tracking" className="hover:underline">ORDER TRACKING</Link></li>
             <li><Link href="/order-tracking" className="hover:underline">ADMIN PANEL</Link></li>
           </ul>

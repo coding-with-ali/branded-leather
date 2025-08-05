@@ -68,7 +68,7 @@ const Featured = () => {
 
       {/* Grid container */}
       <div className="w-full mt-10 flex justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => {
               const rating = product.rating ?? 0;

@@ -5,7 +5,7 @@ import Question from "../../../HomePage/Question";
 import Featured from "@/app/componets/featured";
 import MenLeatherJacketSection from "../../../../componets/MenLeatherJacketSection";
 
-export default function Heritage() {
+export default function LeatherJacket() {
   return (
     <div className="bg-[#fdf7ee] px-4">
       <NewCollectionBanner />

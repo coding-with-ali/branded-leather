@@ -107,7 +107,7 @@ export default function Header() {
   const getDropdownItems = (label: string) =>
     label === "MEN"
       ? [
-          { name: "Leather Jackets", slug: "leatherJacket" },
+          { name: "Leather Jackets", slug: "LeatherJacket" },
           { name: "Black Leather Jackets", slug: "BlackLeatherJacket" },
           { name: "Brown Leather Jackets", slug: "BrownLeatherJacket" },
           { name: "Biker Jackets", slug: "MotorcycleJacket" },
