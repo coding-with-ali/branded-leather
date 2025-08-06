@@ -81,7 +81,7 @@ const Question: React.FC<QuestionProps> = ({ className }) => {
             >
               <button
                 onClick={() => toggleIndex(index)}
-                className="flex items-center justify-between w-full text-left font-extrabold text-[18px]"
+                className="flex items-center justify-between w-full text-left font-extrabold font-sans text-[18px]"
               >
                 <span>{item.question}</span>
                 {openIndexes.includes(index) ? (

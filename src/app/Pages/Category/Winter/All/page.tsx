@@ -10,7 +10,7 @@ export default function Heritage() {
     <div className="bg-[#fdf7ee] px-4">
        <div className=" w-full flex justify-center">
                   <Image
-                    src="/banner/cafe-racer.webp"
+                    src="/banner/winter-jacket.webp"
                     alt="New Collection Jacket"
                     width={900}
                     height={900}
@@ -19,7 +19,7 @@ export default function Heritage() {
                   />
                 </div>
       <Featured />
-      <ProductSection category="Men  Cafe Racer Jacket" />
+      <ProductSection category="winter" />
       <Question className="bg-[#fdf7ee]" /> 
       <MenLeatherJacketSection />
     </div>

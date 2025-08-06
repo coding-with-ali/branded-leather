@@ -8,9 +8,9 @@ import MenLeatherJacketSection from "../../../../componets/MenLeatherJacketSecti
 export default function MotorcycleJacket() {
   return (
     <div className="bg-[#fdf7ee] px-4">
-       <div className=" w-full flex justify-center mt-10">
+       <div className=" w-full flex justify-center ">
                   <Image
-                    src="/banner/Group 4.png"
+                    src="/banner/biker-leather.webp"
                     alt="New Collection Jacket"
                     width={900}
                     height={900}

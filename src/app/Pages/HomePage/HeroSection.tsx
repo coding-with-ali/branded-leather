@@ -1,10 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Herosection() {
   return (
     <div>
       {/* Right Section */}
+      <Link href='/Pages/PageHero/jacket'>
       <div className="bg-black">
 
         {/* Hero Image */}
@@ -23,6 +25,7 @@ export default function Herosection() {
           className='w-[100vw] h-[78vh] md:hidden inline-block'
         />
       </div>
+      </Link>
     </div>
   );
 }

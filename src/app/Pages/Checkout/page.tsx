@@ -74,64 +74,72 @@ const CheckoutPage = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
         {/* Left Form Section */}
         <div className="flex-1 bg-white p-6 rounded-md shadow border">
-          <h2 className="text-2xl font-bold mb-6 border-b pb-2">Contact Information</h2>
+          <h2 className="text-[18px] font-bold font-sans mb-6 border-b pb-2 uppercase">Contact Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              placeholder="First Name"
-              className="border p-3 rounded w-full"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Last Name"
-              className="border p-3 rounded w-full"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
+            <h2 className="text-[15px] font-bold font-sans">Email Address *</h2>
             <input
               type="email"
-              placeholder="Email"
+              placeholder=""
               className="border p-3 rounded w-full md:col-span-2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+          </div>
+
+          <h2 className="text-[18px] font-bold font-sans mb-6 border-b pb-2 uppercase">Shipping To</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 className="text-[15px] font-bold font-sans">First Name *</h2>
             <input
               type="text"
-              placeholder="Phone"
+              placeholder=""
+              className="border p-3 rounded w-full md:col-span-2"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <h2 className="text-[15px] font-bold font-sans">Last Name *</h2>
+            <input
+              type="text"
+              placeholder=""
+              className="border p-3 rounded w-full md:col-span-2"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <h2 className="text-[15px] font-bold font-sans">Phone *</h2>
+            <input
+              type="text"
+              placeholder=""
               className="border p-3 rounded w-full md:col-span-2"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-          </div>
-
-          <h2 className="text-2xl font-bold mt-8 mb-4 border-b pb-2">Shipping Address</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 className="text-[15px] font-bold font-sans">Street Address *</h2>
             <input
               type="text"
-              placeholder="Address"
+              placeholder=""
               className="border p-3 rounded w-full md:col-span-2"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
+            <h2 className="text-[15px] font-bold font-sans">City *</h2>
             <input
               type="text"
-              placeholder="City"
-              className="border p-3 rounded w-full"
+              placeholder=""
+              className="border p-3 rounded w-full md:col-span-2"
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
+            <h2 className="text-[15px] font-bold font-sans">State *</h2>
             <input
               type="text"
-              placeholder="State"
-              className="border p-3 rounded w-full"
+              placeholder=""
+              className="border p-3 rounded w-full md:col-span-2"
               value={state}
               onChange={(e) => setState(e.target.value)}
             />
+            <h2 className="text-[15px] font-bold font-sans">Postal Code/Zip *</h2>
             <input
               type="text"
-              placeholder="Postal Code"
+              placeholder=""
               className="border p-3 rounded w-full md:col-span-2"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}

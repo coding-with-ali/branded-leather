@@ -11,7 +11,7 @@ export default function Heritage() {
     <div className="bg-[#fdf7ee] px-4">
       <div className=" w-full flex justify-center">
             <Image
-              src="/leather-bags.webp"
+              src="/banner/leather-bags.webp"
               alt="New Collection Jacket"
               width={900}
               height={900}

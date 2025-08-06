@@ -179,7 +179,7 @@ export default function Header() {
           <Link href="/Pages/PageHero/jacket" className="text-white font-bold text-[15px]">
             PRIME DELIVERY
           </Link>
-          <Link href="/Pages/ShopList" className="text-white font-bold text-[15px]">
+          <Link href="/Pages/Category/Winter/All" className="text-white font-bold text-[15px]">
             WINTER JACKET
           </Link>
         </div>

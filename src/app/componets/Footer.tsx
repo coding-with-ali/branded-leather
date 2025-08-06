@@ -29,8 +29,8 @@ export default function Footer() {
 
         {/* Explore Column */}
         <div>
-          <h3 className="text-[20px] font-bold text-white mb-3">Explore</h3>
-          <ul className="space-y-2 text-white text-[14px]">
+          <h3 className="text-[24px] font-extrabold text-white mb-3">Explore</h3>
+          <ul className="space-y-2 text-white text-[14px] font-bold">
             <li><Link href="/Pages/Category/MEN/LeatherJacket" className="hover:underline">MEN&rsquo;S JACKETS</Link></li>
             <li><Link href="/Pages/Category/WOMEN/LeatherJacket" className="hover:underline">WOMEN&rsquo;S JACKETS</Link></li>
             <li><Link href="/Pages/PageHero/bags" className="hover:underline">LEATHER BAGS</Link></li>
@@ -43,8 +43,8 @@ export default function Footer() {
 
         {/* Help Column */}
         <div>
-          <h3 className="text-[20px] font-bold text-white mb-3">Help?</h3>
-          <ul className="space-y-2 text-white text-[14px]">
+          <h3 className="text-[24px] font-extrabold text-white mb-3">Help?</h3>
+          <ul className="space-y-2 text-white text-[14px] font-bold">
             <li><Link href="/Pages/SizeGuide" className="hover:underline">SIZE GUIDE</Link></li>
             <li><Link href="/contact-us" className="hover:underline">CONTACT US</Link></li>
             <li><Link href="/Pages/Policy" className="hover:underline">PRIVACY POLICY</Link></li>
