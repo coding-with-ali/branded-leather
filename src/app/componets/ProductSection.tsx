@@ -117,11 +117,21 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
     if (lower.includes("jacket")) return "Leather Jackets";
     if (lower.includes("bag")) return "Bags";
     if (lower.includes("wallet")) return "Wallets";
+    if (lower.includes("Winter")) return "Winters";
+
+
+
+    if (lower.includes("Men Leather Jacket")) return "Men Leather Jackets";
+    if (lower.includes("Men Puffer Jacket")) return "Men Puffer Jackets";
+    if (lower.includes("Men Winter Jacket")) return "Men Winter Jackets";
     if (lower.includes("Men Motorcycle Jacket")) return "Men Motorcycle Jackets";
     if (lower.includes("Men Black Jacket")) return "Men Black Jacket";
     if (lower.includes("Men Brown Jacket")) return "Men Brown Jacket";
     if (lower.includes("Men Bomber Jacket")) return "Men Bomber Jackets";
     if (lower.includes("Men  Cafe Racer Jacket")) return "Men  Cafe Racer Jackets";
+
+
+
    if (lower.includes("Women Motorcycle Jacket")) return "Women Motorcycle Jackets";
     if (lower.includes("Women Black Jacket")) return "Women Black Jacket";
     if (lower.includes("Women Brown Jacket")) return "Women Brown Jacket";
@@ -156,7 +166,7 @@ const ProductSection: React.FC<Props> = ({ searchQuery = '', category = '' }) =>
                   className="h-fit lg:w-[280px] relative flex flex-col bg-white border border-gray-200 shadow-md rounded overflow-hidden"
                 >
                   <div className="absolute top-2 left-2 bg-[#3b0a0a] text-white text-[8px] md:text-[10px] font-semibold px-2 py-1 rounded uppercase z-10">
-                    Prime Delivery
+                    Free Delivery
                   </div>
 
                   {discount > 0 && (

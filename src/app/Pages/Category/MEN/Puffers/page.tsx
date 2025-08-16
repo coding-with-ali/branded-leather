@@ -19,7 +19,7 @@ export default function LeatherJacket() {
                         />
                       </div>
       <Featured />
-      <ProductSection category="Men Leather Jacket" />
+      <ProductSection category="Men Puffer Jacket" />
       <Question className="bg-[#fdf7ee]" /> 
       <MenLeatherJacketSection />
     </div>

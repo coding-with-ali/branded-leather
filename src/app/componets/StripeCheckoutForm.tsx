@@ -68,7 +68,7 @@ const CheckoutForm = ({ amount, orderData, onSuccess }: CheckoutProps) => {
         disabled={!stripe || loading}
         className="bg-gradient-to-r from-black via-gray-900 to-black hover:opacity-90 transition text-white w-full py-3 rounded-lg font-semibold tracking-wide"
       >
-        {loading ? "Processing..." : "Pay Now"}
+         {loading ? "Processing..." : `Pay $${amount.toFixed(2)} Now`}
       </button>
 
       {message && <p className="text-sm text-red-600">{message}</p>}

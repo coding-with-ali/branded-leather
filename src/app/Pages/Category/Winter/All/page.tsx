@@ -19,7 +19,7 @@ export default function Heritage() {
                   />
                 </div>
       <Featured />
-      <ProductSection category="winter" />
+      <ProductSection category="Winter" />
       <Question className="bg-[#fdf7ee]" /> 
       <MenLeatherJacketSection />
     </div>
